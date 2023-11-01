@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.3">
+  <object class="tk.Toplevel" id="root" named="True">
+    <property name="height">720</property>
+    <property name="iconphoto">tiny-nhl-logo.png</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">NHL Simulator</property>
+    <property name="width">1280</property>
+    <containerlayout manager="grid">
+      <property name="propagate">False</property>
+    </containerlayout>
+    <child>
+      <object class="ttk.Frame" id="frame1">
+        <property name="height">720</property>
+        <property name="width">1290</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label3">
+            <property name="image">3.png</property>
+            <property name="width">1280</property>
+            <layout manager="pack" />
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame2">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">50</property>
+          <property name="pady">50</property>
+          <property name="row">0</property>
+          <property name="sticky">sw</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label4">
+            <property name="background">#040404</property>
+            <property name="font">{@Arial Unicode MS} 11 {}</property>
+            <property name="foreground">#ffffff</property>
+            <property name="text" translatable="yes">The logos of the National Hockey League and the names of the National 
+Hockey League Players' Association do not belong to the Cégep de la 
+Gaspésie et les Îles. Distribution outside of the course "420-CS5-GA 
+Simulations Appliquées" is therefore prohibited and illegal.
+
+Les logos de la Ligue Nationale de Hockey et les noms de l'Association 
+des joueurs de la Ligue Nationale de Hockey n'appartiennent pas au 
+Cégep de la Gaspésie et les Îles. La distribution en dehors du 
+cours "420-CS5-GA Simulations Appliquées" est donc interdite et illégale.</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="button1">
+        <property name="command" type="command" cbtype="simple">launchGame</property>
+        <property name="font">{Yu Gothic UI} 12 {}</property>
+        <property name="text" translatable="yes">Match Immédiat</property>
+        <property name="width">17</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="ipadx">100</property>
+          <property name="ipady">15</property>
+          <property name="padx">100</property>
+          <property name="pady">200</property>
+          <property name="row">0</property>
+          <property name="sticky">se</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="button5">
+        <property name="font">{Yu Gothic UI} 12 {}</property>
+        <property name="text" translatable="yes">Mode Directeur Général</property>
+        <property name="width">17</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="ipadx">100</property>
+          <property name="ipady">15</property>
+          <property name="padx">100</property>
+          <property name="pady">100</property>
+          <property name="row">0</property>
+          <property name="sticky">se</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="label1">
+        <property name="background">#000000</property>
+        <property name="borderwidth">0</property>
+        <property name="disabledforeground">#400040</property>
+        <property name="image">icon-nhl-logo.png</property>
+        <property name="text" translatable="yes">label1</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">150</property>
+          <property name="pady">50</property>
+          <property name="row">0</property>
+          <property name="sticky">ne</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
