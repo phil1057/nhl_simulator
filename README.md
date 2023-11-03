@@ -1,7 +1,5 @@
 # Introduction
 
-![Preview](https://raw.githubusercontent.com/phil1057/nhl_simulator/master/img/main_menu/nhl-logo.png)
-
 ## Vision du projet
 
 Le projet va simuler en temps accéléré des matchs entre deux équipes de la Ligue nationale de hockey. Il y aura possibilité de contrôler une équipe, les deux équipes ou simplement regarder le match. Possiblement, il y aura un mode directeur général, qui simulera la saison au complet et gardera les statistiques des joueurs et des équipes. Les équipes qui seront intégrées dans le jeu seront les équipes qui font partie de la division Atlantique de la Ligue nationale de hockey, les équipes seront listées :
@@ -31,3 +29,6 @@ Le projet sera développé avec le langage de programmation Python et une interf
 
 Le strict minimum pour ce projet est de faire un programme qui simule un match entre deux équipes de la division Atlantique de la Ligue Nationale de Hockey. Avoir une base de données avec les joueurs des équipes et leur cote de joueur.
 
+### Diagramme de séquences
+
+![Preview](https://github.com/phil1057/nhl_simulator/blob/master/img/classdiagram.png?raw=true)
