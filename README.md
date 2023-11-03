@@ -1,4 +1,5 @@
-# Introduction
+# Introduction 
+![Preview](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/main_menu/icon-nhl-logo.png?token=GHSAT0AAAAAACJ2KYZA44U76BM334RFI7JQZKFAQZA)
 
 ## Vision du projet
 
@@ -31,4 +32,54 @@ Le strict minimum pour ce projet est de faire un programme qui simule un match e
 
 ### Diagramme de séquences
 
-![Preview](https://github.com/phil1057/nhl_simulator/blob/master/img/classdiagram.png?raw=true)
+![Diagramme Sequences](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/seqdiagram.png?token=GHSAT0AAAAAACJ2KYZAYVBFE44PT7X47H2UZKE7XIQ)
+
+### Glossaire
+
+Le glossaire est disponible en PDF [ici](https://github.com/phil1057/nhl_simulator/blob/main/Glossaire.pdf).
+
+# Maquettes
+
+## Simulation de matchs
+
+![sim](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/game.png?token=GHSAT0AAAAAACJ2KYZBC6ILSJXRDZ43DT5SZKE76SA)
+
+La maquette représente une maquette de la simulation d’un match. Le gardien de but sur la glace, les joueurs sur la glace et les joueurs sur le banc sont représentés avec des statistiques sur le match en cours. Si un but est marqué, une alerte apparait avec le marqueur du but et les assistances s’ils ont lieu sur la patinoire ou les actions fictives ont lieu. La partie évènements est un résumé des actions récentes. Si une pénalité a lieu, elle sera affichée du côté de l’équipe qui est en avantage numérique. Le contrôle d’une équipe se fait à partir des flèches de tempo de l’équipe. Il sera possible de contrôler une équipe, les deux ou aucune des deux. 
+
+![Strats](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/strats.png?token=GHSAT0AAAAAACJ2KYZB7N5EED7A233GEYTKZKFANRQ)
+
+Le tempo très défensif va augmenter de +2 la cote défensive de tous les joueurs et baisser la cote offensive de -2, le tempo défensif va augmenter de +1 la cote défensive des joueurs et modifier de -1 la cote offensive. Le tempo neutre ne modifiera pas la cote. Le même principe s’applique pour les tempos offensifs qui boosteront la cote offensive de +1 et baissera la cote défensive de -1 et le tempo très offensif va modifier la cote offensive de +1 et la cote défensive de -1.
+
+## Menu principal
+![MainMenu](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/mainmenu.png?token=GHSAT0AAAAAACJ2KYZAVGZMR5D26QZXFN7UZKFAOMA)
+
+Lors de l’ouverture du jeu, le menu principal sera la première page présentée. Elle dirigera l’utilisateur ou il souhaite aller, soit dans un match immédiat, fonctionnalité qui permet de simuler un match avec les équipes que l’utilisateur choisira. Ou le mode Directeur général ou l’utilisateur pourra joueur une saison avec une équipe de son choix.
+
+## Match immédiat
+
+![QuickGame](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/quickgame.png?token=GHSAT0AAAAAACJ2KYZBPOGNWMW4N2GZO6TGZKFASEA)
+
+La carte du match immédiat permet de sélectionner dans les équipes sélectionnées deux équipes qui vont s’affronter pour seulement une partie sans garder les statistiques qui sont utiles pour la saison régulière.
+
+## Diagramme de classes
+![ClassDiagram](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/classdiagram.png?token=GHSAT0AAAAAACJ2KYZBVLS7DOYUNTFWDP2EZKFATAQ)
+
+# User Stories
+
+## Faire un match immédiat
+
+L’objectif du match immédiat est de simuler un match avec les équipes sélectionnées sans passer par la création d’une saison pour simuler un match entre deux équipes sélectionnées.
+
+Précondition : L’utilisateur est dans le mode de jeu « Match immédiat » et dans l’onglet
+
+1.	L’utilisateur sélectionne l’équipe qui va jouer à l’étranger.
+2.	L’utilisateur sélectionne l’équipe qui va jouer à domicile.
+3.	L’utilisateur sélectionne quelle équipe il veut contrôler.
+4.	L’utilisateur clique le bouton Confirmer et le match entre les deux équipes démarre.
+
+## Match (Gameplay)
+
+Précondition : Un match est débuté dans le mode « Match immédiat » et une équipe peux être contrôlée. 
+
+1.	Un joueur peut contrôler la stratégie de l’équipe ou des équipes sélectionnées.
+2.	Il peut choisir entre les stratégies « Très défensif », « Défensif », « Neutre », « Offensif » et « Très offensif ».
