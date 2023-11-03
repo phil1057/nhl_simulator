@@ -1,5 +1,5 @@
 # Introduction 
-![Preview](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/main_menu/icon-nhl-logo.png?token=GHSAT0AAAAAACJ2KYZA44U76BM334RFI7JQZKFAQZA)
+![Preview](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/main_menu/icon-nhl-logo.png?token=GHSAT0AAAAAACJ2KYZBV4LR77DY2JZ6IFGEZKFAXXQ)
 
 ## Vision du projet
 
@@ -32,7 +32,7 @@ Le strict minimum pour ce projet est de faire un programme qui simule un match e
 
 ### Diagramme de séquences
 
-![Diagramme Sequences](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/seqdiagram.png?token=GHSAT0AAAAAACJ2KYZAYVBFE44PT7X47H2UZKE7XIQ)
+![Diagramme Sequences](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/seqdiagram.png?token=GHSAT0AAAAAACJ2KYZABG4BZ3CJLPNARKZ4ZKFA2GQ)
 
 ### Glossaire
 
@@ -42,11 +42,11 @@ Le glossaire est disponible en PDF [ici](https://github.com/phil1057/nhl_simulat
 
 ## Simulation de matchs
 
-![sim](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/game.png?token=GHSAT0AAAAAACJ2KYZBC6ILSJXRDZ43DT5SZKE76SA)
+![sim](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/game.png?token=GHSAT0AAAAAACJ2KYZB7W3DBMXREPHV4WRSZKFA2TQ)
 
 La maquette représente une maquette de la simulation d’un match. Le gardien de but sur la glace, les joueurs sur la glace et les joueurs sur le banc sont représentés avec des statistiques sur le match en cours. Si un but est marqué, une alerte apparait avec le marqueur du but et les assistances s’ils ont lieu sur la patinoire ou les actions fictives ont lieu. La partie évènements est un résumé des actions récentes. Si une pénalité a lieu, elle sera affichée du côté de l’équipe qui est en avantage numérique. Le contrôle d’une équipe se fait à partir des flèches de tempo de l’équipe. Il sera possible de contrôler une équipe, les deux ou aucune des deux. 
 
-![Strats](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/strats.png?token=GHSAT0AAAAAACJ2KYZB7N5EED7A233GEYTKZKFANRQ)
+![Strats](https://raw.githubusercontent.com/phil1057/nhl_simulator/main/img/strats.png?token=GHSAT0AAAAAACJ2KYZBAE45NVOTSHEM5SW2ZKFA3DA)
 
 Le tempo très défensif va augmenter de +2 la cote défensive de tous les joueurs et baisser la cote offensive de -2, le tempo défensif va augmenter de +1 la cote défensive des joueurs et modifier de -1 la cote offensive. Le tempo neutre ne modifiera pas la cote. Le même principe s’applique pour les tempos offensifs qui boosteront la cote offensive de +1 et baissera la cote défensive de -1 et le tempo très offensif va modifier la cote offensive de +1 et la cote défensive de -1.
 
