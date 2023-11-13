@@ -1,0 +1,642 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.3">
+  <object class="tk.Toplevel" id="root" named="True">
+    <property name="height">720</property>
+    <property name="iconphoto">tiny-nhl-logo.png</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">NHL Simulator</property>
+    <property name="width">1280</property>
+    <containerlayout manager="grid">
+      <property name="propagate">False</property>
+    </containerlayout>
+    <child>
+      <object class="ttk.Frame" id="awayside_frame" named="True">
+        <property name="height">720</property>
+        <property name="width">426</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
+        <containerlayout manager="pack">
+          <property name="propagate">False</property>
+        </containerlayout>
+        <child>
+          <object class="ttk.Separator" id="separateur_away" named="True">
+            <property name="orient">horizontal</property>
+            <property name="takefocus">false</property>
+            <layout manager="pack">
+              <property name="expand">false</property>
+              <property name="fill">both</property>
+              <property name="pady">40</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="city_away" named="True">
+            <property name="font">{Yu Gothic Medium} 24 {}</property>
+            <property name="text" translatable="yes">Équipe</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="name_away" named="True">
+            <property name="font">{Microsoft YaHei} 20 {bold}</property>
+            <property name="text" translatable="yes">Étranger</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="logo_away" named="True">
+            <property name="image">sabres.png</property>
+            <property name="text" translatable="yes">label5</property>
+            <layout manager="pack">
+              <property name="pady">50</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="team_ratings_away" named="True">
+            <property name="height">200</property>
+            <property name="text" translatable="yes">Équipe visiteure</property>
+            <property name="width">426</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+            <containerlayout manager="pack">
+              <property name="propagate">False</property>
+            </containerlayout>
+            <child>
+              <object class="ttk.Notebook" id="notebook_away" named="True">
+                <property name="height">200</property>
+                <property name="width">425</property>
+                <layout manager="pack">
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="team_away_tab" named="True">
+                    <property name="state">normal</property>
+                    <property name="text" translatable="yes">Groupe</property>
+                    <child>
+                      <object class="ttk.Frame" id="team_ratings_away_frame" named="True">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="forwards_label_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Attaque</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="padx">100</property>
+                              <property name="pady">3</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="defense_label_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Défense</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="total_label_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Total</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="forwards_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="defense_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="total_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="player_away_tab" named="True">
+                    <property name="text" translatable="yes">Joueurs</property>
+                    <child>
+                      <object class="ttk.Frame" id="player_ratings_away_frame" named="True">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="best_player_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Premier joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="padx">100</property>
+                              <property name="pady">3</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="second_player_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Deuxième Joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="third_player_away" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Troisième Joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="best_player_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="second_player_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="third_player_rating_away" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="center_frame" named="True">
+        <property name="height">720</property>
+        <property name="width">427</property>
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property name="propagate">False</property>
+        </containerlayout>
+        <child>
+          <object class="ttk.Label" id="choix_des_equipes_label" named="True">
+            <property name="font">{Yu Gothic UI Semibold} 24 {}</property>
+            <property name="text" translatable="yes">Choix des équipes</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="page_description_label" named="True">
+            <property name="font">{Yu Gothic UI Semilight} 14 {}</property>
+            <property name="justify">center</property>
+            <property name="text" translatable="yes">En sélectionnant une option.
+Le match va débuter.</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="both_teams_button" named="True">
+            <property name="image">both_sides.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button1</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="away_team_button" named="True">
+            <property name="image">left.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button2</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipadx">9</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="home_team_button" named="True">
+            <property name="image">right.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button3</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="padx">30</property>
+              <property name="row">3</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="none_button" named="True">
+            <property name="image">none.png</property>
+            <property name="style">Toolbutton</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="pady">30</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="up_away_button" named="True">
+            <property name="image">up.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button5</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="down_away_buttton" named="True">
+            <property name="image">down.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button5</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">7</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="up_home_button" named="True">
+            <property name="image">up.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button5</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="down_home_button" named="True">
+            <property name="image">down.png</property>
+            <property name="style">Toolbutton</property>
+            <property name="text" translatable="yes">button5</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">7</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="parcourir_equipes_label" named="True">
+            <property name="font">{Yu Gothic UI Semibold} 18 {}</property>
+            <property name="text" translatable="yes">Parcourir les équipes</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">6</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="nhl_logo" named="True">
+            <property name="image">tiny-nhl-logo.png</property>
+            <property name="text" translatable="yes">label1</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="pady">20</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Separator" id="central_separator" named="True">
+            <property name="cursor">no</property>
+            <property name="orient">horizontal</property>
+            <property name="takefocus">false</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="ipadx">100</property>
+              <property name="pady">15</property>
+              <property name="row">4</property>
+              <property name="sticky">s</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="homeside_frame" named="True">
+        <property name="height">720</property>
+        <property name="width">426</property>
+        <layout manager="grid">
+          <property name="column">2</property>
+          <property name="row">0</property>
+        </layout>
+        <containerlayout manager="pack">
+          <property name="propagate">False</property>
+        </containerlayout>
+        <child>
+          <object class="ttk.Separator" id="separateur_home" named="True">
+            <property name="orient">horizontal</property>
+            <property name="takefocus">false</property>
+            <layout manager="pack">
+              <property name="expand">false</property>
+              <property name="fill">both</property>
+              <property name="pady">40</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="city_home" named="True">
+            <property name="font">{Yu Gothic Medium} 24 {}</property>
+            <property name="text" translatable="yes">Équipe</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="name_home" named="True">
+            <property name="font">{Microsoft YaHei} 20 {bold}</property>
+            <property name="text" translatable="yes">Domicile</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="logo_home" named="True">
+            <property name="image">maple-leafs.png</property>
+            <property name="text" translatable="yes">label5</property>
+            <layout manager="pack">
+              <property name="pady">50</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="team_ratings_home" named="True">
+            <property name="height">200</property>
+            <property name="labelanchor">ne</property>
+            <property name="text" translatable="yes">Équipe à domicile</property>
+            <property name="width">426</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+            <containerlayout manager="pack">
+              <property name="propagate">False</property>
+            </containerlayout>
+            <child>
+              <object class="ttk.Notebook" id="notebook_home" named="True">
+                <property name="height">200</property>
+                <property name="width">425</property>
+                <bind sequence="&lt;1&gt;" handler="clback" add="" />
+                <layout manager="pack">
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="team_home_tab" named="True">
+                    <property name="state">normal</property>
+                    <property name="text" translatable="yes">Groupe
+</property>
+                    <child>
+                      <object class="ttk.Frame" id="team_ratings_home_frame" named="True">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="forwards_label_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Attaque</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="padx">100</property>
+                              <property name="pady">3</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="defense_label_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Défense</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="total_label_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Total</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="forwards_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="defense_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="total_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="player_home_tab" named="True">
+                    <property name="text" translatable="yes">Joueurs
+</property>
+                    <child>
+                      <object class="ttk.Frame" id="player_ratings_home_frame" named="True">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="best_player_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Premier joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="padx">100</property>
+                              <property name="pady">3</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="second_player_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Deuxième Joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="third_player_home" named="True">
+                            <property name="font">{Yu Gothic UI Semilight} 12 {}</property>
+                            <property name="text" translatable="yes">Troisième Joueur</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="pady">3</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="best_player_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="second_player_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="third_player_rating_home" named="True">
+                            <property name="font">{Yu Gothic UI Semibold} 12 {}</property>
+                            <property name="text" translatable="yes">90</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
