@@ -6,5 +6,4 @@ from playsound import playsound
 main_menu = MainMenu()
 main_menu.run()
 
-quick_game = QuickGame()
-quick_game.run()
+

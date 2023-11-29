@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 import pathlib
 import pygubu
+import tkinter as tk
 from pygame import mixer
 from game import *
+from quick_game import *
 
 mixer.init()
 mixer.music.load("la_soiree_du_hockey_loop.mp3")
@@ -24,11 +26,13 @@ class MainMenu:
         mixer.music.play()
         self.mainwindow.mainloop()
 
+    def Quick_Game(self):
+        self.main_menu.window.destroy()
+        quick_game = QuickGame()
+        quick_game.run()
+        
+        
+
 if __name__ == "__main__":
     main_menu = MainMenu()
     main_menu.run()
-
-
-def launchGame():
-    game = Game()
-    game.run()

@@ -16,9 +16,6 @@ class QuickGame:
 
     def run(self):
         self.mainwindow.mainloop()
-
-    def ChangeHomeTeam():
-        teams : []
     
 
 if __name__ == "__main__":

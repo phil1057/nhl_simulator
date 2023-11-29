@@ -60,7 +60,7 @@ cours "420-CS5-GA Simulations Appliquées" est donc interdite et illégale.</pro
     </child>
     <child>
       <object class="tk.Button" id="button1">
-        <property name="command" type="command" cbtype="simple">launchGame</property>
+        <property name="command" type="command" cbtype="simple">Quick_Game</property>
         <property name="font">{Yu Gothic UI} 12 {}</property>
         <property name="text" translatable="yes">Match Immédiat</property>
         <property name="width">17</property>
@@ -78,7 +78,7 @@ cours "420-CS5-GA Simulations Appliquées" est donc interdite et illégale.</pro
     <child>
       <object class="tk.Button" id="button5">
         <property name="font">{Yu Gothic UI} 12 {}</property>
-        <property name="text" translatable="yes">Mode Directeur Général</property>
+        <property name="text" translatable="yes">Afficher les équipes/joueurs</property>
         <property name="width">17</property>
         <layout manager="grid">
           <property name="column">0</property>
