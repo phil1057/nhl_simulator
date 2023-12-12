@@ -414,7 +414,7 @@
         </child>
         <child>
           <object class="ttk.Frame" id="center_top_frame" named="True">
-            <property name="height">140</property>
+            <property name="height">300</property>
             <property name="width">680</property>
             <layout manager="grid">
               <property name="column">1</property>
@@ -472,7 +472,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="nhl_logo" named="True">
-                <property name="image">tiny-nhl-logo.png</property>
+                <property name="image">img/main_menu/tiny-nhl-logo.png</property>
                 <property name="text" translatable="yes">label23</property>
                 <layout manager="grid">
                   <property name="column">1</property>
@@ -495,9 +495,19 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="label32">
-                <property name="text" translatable="yes"> </property>
-                <property name="width">37</property>
+              <object class="tk.Label" id="logo_home" named="True">
+                <property name="image">img/ingame_logos/boston.png</property>
+                <property name="text" translatable="yes">label1</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Label" id="logo_away" named="True">
+                <property name="image">img/ingame_logos/montreal.png</property>
+                <property name="text" translatable="yes">label2</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="row">0</property>
@@ -508,7 +518,7 @@
         </child>
         <child>
           <object class="ttk.Frame" id="center_bottom_frame" named="True">
-            <property name="height">480</property>
+            <property name="height">350</property>
             <property name="width">680</property>
             <layout manager="grid">
               <property name="column">1</property>
@@ -520,7 +530,7 @@
             </containerlayout>
             <child>
               <object class="ttk.Label" id="ice_photo" named="True">
-                <property name="image">pati.png</property>
+                <property name="image">img/ice/BOS.png</property>
                 <property name="text" translatable="yes">label2</property>
                 <layout manager="pack">
                   <property name="fill">both</property>
