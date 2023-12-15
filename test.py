@@ -1,5 +1,34 @@
 import tkinter as tk
+import time
 
+def update_timer():
+    global countdown_seconds
+    if countdown_seconds > 0:
+        mins, secs = divmod(countdown_seconds, 60)
+        timer_label.config(text=f"{mins:02d}:{secs:02d}")
+        countdown_seconds -= 1
+        time.sleep(1)  # Pause execution for 1 second
+        update_timer()
+    else:
+        timer_label.config(text="Countdown finished!")
+
+# Create tkinter window
+root = tk.Tk()
+root.title("Countdown Timer")
+
+# Initial countdown time in seconds
+countdown_seconds = 60  # Replace this with your desired countdown time
+
+# Create and place a label to display the timer
+timer_label = tk.Label(root, font=("Arial", 24), text="")
+timer_label.pack(padx=20, pady=20)
+
+# Start the countdown
+update_timer()
+
+# Start the tkinter main loop
+root.mainloop()
+"""
 class SampleApp(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -20,7 +49,7 @@ class SampleApp(tk.Tk):
 
         # Show the initial page with initial variable
         initial_variable = "Initial information"
-        self.show_page(PageOne, initial_variable)
+        self.show_page(PageThree, initial_variable)
 
     def show_page(self, page_to_show, info=None):
         # Show the requested page with information
@@ -28,6 +57,8 @@ class SampleApp(tk.Tk):
         page.tkraise()
         if hasattr(page, "receive_info"):
             page.receive_info(info)
+
+
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
@@ -43,6 +74,9 @@ class PageOne(tk.Frame):
     def go_to_page_two(self):
         info_to_send = self.entry.get()  # Get information from Entry widget
         self.controller.show_page(PageTwo, info_to_send)
+
+
+
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
@@ -61,6 +95,9 @@ class PageTwo(tk.Frame):
     def go_to_page_three(self):
         self.controller.show_page(PageThree)
 
+
+
+
 class PageThree(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -76,3 +113,4 @@ class PageThree(tk.Frame):
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
+    """

@@ -6,20 +6,23 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from PIL import Image, ImageTk
 from db import Database
-PROJECT_PATH = pathlib.Path(__file__).parent
-PROJECT_UI = PROJECT_PATH / "gui/quick_game.ui"
+import random
+from game import *
 
 
-class QuickGame:
-    def __init__(self, master=None):
+class QuickGame(tk.Frame):
+    def __init__(self, parent, controller):
+        # build ui
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
 
         db = Database()
-
-        self.root = tk.Tk() if master is None else tk.Toplevel(master)
 
         db.cursor.execute("SELECT * FROM equipes")
         global equipes
         equipes = db.cursor.fetchall()
+
+        global logo_home
 
         global selected_home_team
         global selected_away_team
@@ -36,11 +39,38 @@ class QuickGame:
         away_team_name = tk.StringVar()
         away_team_city = tk.StringVar()
 
-        home_team_name.set("Bruins")
-        home_team_city.set("Boston")
+        global home_coach_name_text; home_coach_name_text = tk.StringVar()
+        global home_arena_text; home_arena_text = tk.StringVar()
+        global home_capacity_text; home_capacity_text = tk.StringVar()
 
-        away_team_name.set("Red Wings")
-        away_team_city.set("Detroit")
+        global away_coach_name_text; away_coach_name_text = tk.StringVar()
+        global away_arena_text; away_arena_text = tk.StringVar()
+        global away_capacity_text; away_capacity_text = tk.StringVar() 
+        
+        global total_rating_home_text; total_rating_home_text = tk.StringVar()
+        global forwards_rating_home_text; forwards_rating_home_text = tk.StringVar()
+        global defense_rating_home_text; defense_rating_home_text = tk.StringVar()
+
+        global total_rating_away_text; total_rating_away_text = tk.StringVar()
+        global forwards_rating_away_text; forwards_rating_away_text = tk.StringVar()
+        global defense_rating_away_text; defense_rating_away_text = tk.StringVar()
+        
+        global home_top_rating; home_top_rating = tk.StringVar()
+        global home_second_rating; home_second_rating = tk.StringVar()
+        global home_third_rating; home_third_rating = tk.StringVar()
+
+        global home_top_player; home_top_player = tk.StringVar()
+        global home_second_player; home_second_player = tk.StringVar()
+        global home_third_player; home_third_player = tk.StringVar()
+
+        global away_top_rating; away_top_rating = tk.StringVar()
+        global away_second_rating; away_second_rating = tk.StringVar()
+        global away_third_rating; away_third_rating = tk.StringVar()
+
+        global away_top_player; away_top_player = tk.StringVar()
+        global away_second_player; away_second_player = tk.StringVar()
+        global away_third_player; away_third_player = tk.StringVar()
+
 
         def ChangeHomeTeamUp():
             global selected_home_team
@@ -48,6 +78,33 @@ class QuickGame:
             selected_home_team += 1
             if selected_home_team == 8:
                 selected_home_team = 1
+
+            # Section Informations
+            home_coach_name_text.set(equipes[selected_home_team][5])
+            home_arena_text.set(equipes[selected_home_team][3])
+            home_capacity_text.set(equipes[selected_home_team][4])
+
+            # Section Général
+            db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_home_team][6]+"' AND player.def < 100;")
+            global global_rating
+            global_rating = db.cursor.fetchall()
+
+            total_rating_home_text.set(global_rating[0][0])
+            forwards_rating_home_text.set(global_rating[0][1])
+            defense_rating_home_text.set(global_rating[0][2])
+
+            # Section Joueurs
+            db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_home_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+            global home_top3_players
+            home_top3_players = db.cursor.fetchall()
+
+            home_top_rating.set(str(home_top3_players[0][11]))
+            home_second_rating.set(str(home_top3_players[1][11]))
+            home_third_rating.set(str(home_top3_players[2][11]))
+
+            home_top_player.set(home_top3_players[0][1])
+            home_second_player.set(home_top3_players[1][1])
+            home_third_player.set(home_top3_players[2][1])
 
             home_team_city.set(equipes[selected_home_team][2])
             home_team_name.set(equipes[selected_home_team][1])
@@ -63,6 +120,35 @@ class QuickGame:
             if selected_home_team == 0:
                 selected_home_team = 7
 
+            # Section Informations
+            home_coach_name_text.set(equipes[selected_home_team][5])
+            home_arena_text.set(equipes[selected_home_team][3])
+            home_capacity_text.set(equipes[selected_home_team][4])
+
+            # Section Joueurs
+            db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_home_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+            global home_top3_players
+            home_top3_players = db.cursor.fetchall()
+
+            home_top_rating.set(str(home_top3_players[0][11]))
+            home_second_rating.set(str(home_top3_players[1][11]))
+            home_third_rating.set(str(home_top3_players[2][11]))
+
+            home_top_player.set(home_top3_players[0][1])
+            home_second_player.set(home_top3_players[1][1])
+            home_third_player.set(home_top3_players[2][1])
+
+            # Section Général
+            db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_home_team][6]+"' AND player.def < 100;")
+            global global_rating
+            global_rating = db.cursor.fetchall()
+
+            total_rating_home_text.set(global_rating[0][0])
+            forwards_rating_home_text.set(global_rating[0][1])
+            defense_rating_home_text.set(global_rating[0][2])
+
+            
+
             home_team_city.set(equipes[selected_home_team][2])
             home_team_name.set(equipes[selected_home_team][1])
 
@@ -71,11 +157,37 @@ class QuickGame:
 
         def ChangeAwayTeamUp():
             global selected_away_team
-            
 
             selected_away_team += 1
             if selected_away_team == 8:
                 selected_away_team = 1
+
+            # Section Informations
+            away_coach_name_text.set(equipes[selected_away_team][5])
+            away_arena_text.set(equipes[selected_away_team][3])
+            away_capacity_text.set(equipes[selected_away_team][4])
+            
+            # Section Général
+            db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_away_team][6]+"' AND player.def < 100;")
+            global global_rating
+            global_rating = db.cursor.fetchall()
+
+            total_rating_away_text.set(global_rating[0][0])
+            forwards_rating_away_text.set(global_rating[0][1])
+            defense_rating_away_text.set(global_rating[0][2])
+
+            # Section Joueurs
+            db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_away_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+            global away_top3_players
+            away_top3_players = db.cursor.fetchall()
+
+            away_top_rating.set(str(away_top3_players[0][11]))
+            away_second_rating.set(str(away_top3_players[1][11]))
+            away_third_rating.set(str(away_top3_players[2][11]))
+
+            away_top_player.set(away_top3_players[0][1])
+            away_second_player.set(away_top3_players[1][1])
+            away_third_player.set(away_top3_players[2][1])
             
             away_team_city.set(equipes[selected_away_team][2])
             away_team_name.set(equipes[selected_away_team][1])
@@ -89,6 +201,35 @@ class QuickGame:
             selected_away_team -= 1
             if selected_away_team == 0:
                 selected_away_team = 7
+
+            # Section Informations
+            away_coach_name_text.set(equipes[selected_away_team][5])
+            away_arena_text.set(equipes[selected_away_team][3])
+            away_capacity_text.set(equipes[selected_away_team][4])
+
+            # Section Joueurs
+            db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_away_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+            global away_top3_players
+            away_top3_players = db.cursor.fetchall()
+
+            away_top_rating.set(str(away_top3_players[0][11]))
+            away_second_rating.set(str(away_top3_players[1][11]))
+            away_third_rating.set(str(away_top3_players[2][11]))
+
+            away_top_player.set(away_top3_players[0][1])
+            away_second_player.set(away_top3_players[1][1])
+            away_third_player.set(away_top3_players[2][1])
+
+            # Section Général
+            db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_away_team][6]+"' AND player.def < 100;")
+            global global_rating
+            global_rating = db.cursor.fetchall()
+
+            total_rating_away_text.set(global_rating[0][0])
+            forwards_rating_away_text.set(global_rating[0][1])
+            defense_rating_away_text.set(global_rating[0][2])
+
+            
             
             away_team_city.set(equipes[selected_away_team][2])
             away_team_name.set(equipes[selected_away_team][1])
@@ -98,15 +239,12 @@ class QuickGame:
 
 
         def StartGame():
-            away_team = equipes[selected_away_team]
-            home_team = equipes[selected_home_team]
+            teams = (equipes[selected_away_team], equipes[selected_home_team])
+            self.controller.show_page(Game, teams)
 
-        self.img_tinynhllogo = ImageTk.PhotoImage(file="img/main_menu/tiny-nhl-logo.png")
-        self.root.configure(height=720, width=1280)
-        self.root.iconphoto(True, self.img_tinynhllogo)
-        self.root.resizable(False, False)
-        self.root.title("NHL Simulator")
-        self.awayside_frame = ttk.Frame(self.root)
+        self.img_tinynhllogo = tk.PhotoImage(file="img/main_menu/tiny-nhl-logo.png")
+
+        self.awayside_frame = ttk.Frame(self)
         self.awayside_frame.configure(height=720, width=426)
         self.separateur_away = ttk.Separator(self.awayside_frame)
         self.separateur_away.configure(orient="horizontal", takefocus=False)
@@ -145,19 +283,19 @@ class QuickGame:
         self.defense_label_away.grid(column=0, pady=3, row=1)
         self.total_label_away = tk.Label(self.team_ratings_away_frame)
         self.total_label_away.configure(
-            font="{Yu Gothic UI Semilight} 12 {}", text='Total')
+            font="{Yu Gothic UI Semilight} 12 {}", text='Général')
         self.total_label_away.grid(column=0, pady=3, row=2)
         self.forwards_rating_away = tk.Label(self.team_ratings_away_frame)
         self.forwards_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=forwards_rating_away_text)
         self.forwards_rating_away.grid(column=1, row=0)
         self.defense_rating_away = tk.Label(self.team_ratings_away_frame)
         self.defense_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=defense_rating_away_text)
         self.defense_rating_away.grid(column=1, row=1)
         self.total_rating_away = tk.Label(self.team_ratings_away_frame)
         self.total_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=total_rating_away_text)
         self.total_rating_away.grid(column=1, row=2)
         self.team_ratings_away_frame.pack(side="top")
         self.notebook_away.add(
@@ -169,41 +307,70 @@ class QuickGame:
         self.best_player_away = tk.Label(self.player_ratings_away_frame)
         self.best_player_away.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Premier joueur')
+            textvariable=away_top_player)
         self.best_player_away.grid(column=0, padx=100, pady=3, row=0)
         self.second_player_away = tk.Label(self.player_ratings_away_frame)
         self.second_player_away.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Deuxième Joueur')
+            textvariable=away_second_player)
         self.second_player_away.grid(column=0, pady=3, row=1)
         self.third_player_away = tk.Label(self.player_ratings_away_frame)
         self.third_player_away.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Troisième Joueur')
+            textvariable=away_third_player)
         self.third_player_away.grid(column=0, pady=3, row=2)
         self.best_player_rating_away = tk.Label(
             self.player_ratings_away_frame)
         self.best_player_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=away_top_rating)
         self.best_player_rating_away.grid(column=1, row=0)
         self.second_player_rating_away = tk.Label(
             self.player_ratings_away_frame)
         self.second_player_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=away_second_rating)
         self.second_player_rating_away.grid(column=1, row=1)
         self.third_player_rating_away = tk.Label(
             self.player_ratings_away_frame)
         self.third_player_rating_away.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=away_third_rating)
         self.third_player_rating_away.grid(column=1, row=2)
         self.player_ratings_away_frame.pack(side="top")
         self.notebook_away.add(self.player_ratings_away_frame, text='Joueurs')
+        self.info_away_frame = tk.Frame(self.notebook_away)
+        self.info_away_frame.configure(height=200, width=200)
+        self.away_coach_label = tk.Label(self.info_away_frame)
+        self.away_coach_label.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            text='Entraîneur-chef')
+        self.away_coach_label.grid(column=0, ipadx=50, row=0, sticky="s")
+        self.away_coach_name = tk.Label(self.info_away_frame)
+        self.away_coach_name.configure(
+            font="{Yu Gothic UI Semibold} 12 {bold}",
+            textvariable=away_coach_name_text)
+        self.away_coach_name.grid(column=0, row=1)
+        self.away_arena_label = tk.Label(self.info_away_frame)
+        self.away_arena_label.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            text='Aréna/Capacité')
+        self.away_arena_label.grid(column=1, ipadx=50, row=0)
+        self.away_arena_name = tk.Label(self.info_away_frame)
+        self.away_arena_name.configure(
+            font="{Yu Gothic UI Semibold} 12 {bold}",
+            textvariable=away_arena_text)
+        self.away_arena_name.grid(column=1, row=1)
+        self.away_capacity = tk.Label(self.info_away_frame)
+        self.away_capacity.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            textvariable=away_capacity_text)
+        self.away_capacity.grid(column=1, ipadx=50, row=2)
+        self.info_away_frame.pack(side="top")
+        self.notebook_away.add(self.info_away_frame, text='Informations')
         self.notebook_away.pack(side="top")
         self.team_ratings_away.pack(side="top")
         self.team_ratings_away.pack_propagate(0)
         self.awayside_frame.grid(column=0, row=0)
         self.awayside_frame.pack_propagate(0)
-        self.center_frame = ttk.Frame(self.root)
+        self.center_frame = ttk.Frame(self)
         self.center_frame.configure(height=720, width=427)
         self.choix_des_equipes_label = tk.Label(self.center_frame)
         self.choix_des_equipes_label.configure(
@@ -287,7 +454,7 @@ class QuickGame:
             column=1, ipadx=100, pady=15, row=4, sticky="s")
         self.center_frame.grid(column=1, row=0)
         self.center_frame.grid_propagate(0)
-        self.homeside_frame = ttk.Frame(self.root)
+        self.homeside_frame = ttk.Frame(self)
         self.homeside_frame.configure(height=720, width=426)
         self.separateur_home = ttk.Separator(self.homeside_frame)
         self.separateur_home.configure(orient="horizontal", takefocus=False)
@@ -307,8 +474,7 @@ class QuickGame:
             textvariable=home_team_name)
         self.name_home.pack(side="top")
         self.logo_home = tk.Label(self.homeside_frame)
-        self.img_logo_home = ImageTk.PhotoImage(file="img/team_logos/1.png")
-        self.logo_home.configure(image=self.img_logo_home, text='label5')
+        self.logo_home.configure(image=self.img_home_logo, text='label5')
         self.logo_home.pack(pady=50, side="top")
         self.team_ratings_home = ttk.Labelframe(self.homeside_frame)
         self.team_ratings_home.configure(
@@ -330,19 +496,19 @@ class QuickGame:
         self.defense_label_home.grid(column=0, pady=3, row=1)
         self.total_label_home = tk.Label(self.team_ratings_home_frame)
         self.total_label_home.configure(
-            font="{Yu Gothic UI Semilight} 12 {}", text='Total')
+            font="{Yu Gothic UI Semilight} 12 {}", text='Général')
         self.total_label_home.grid(column=0, pady=3, row=2)
         self.forwards_rating_home = tk.Label(self.team_ratings_home_frame)
         self.forwards_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=forwards_rating_home_text)
         self.forwards_rating_home.grid(column=1, row=0)
         self.defense_rating_home = tk.Label(self.team_ratings_home_frame)
         self.defense_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=defense_rating_home_text)
         self.defense_rating_home.grid(column=1, row=1)
         self.total_rating_home = tk.Label(self.team_ratings_home_frame)
         self.total_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=total_rating_home_text)
         self.total_rating_home.grid(column=1, row=2)
         self.team_ratings_home_frame.pack(side="top")
         self.notebook_home.add(
@@ -354,48 +520,143 @@ class QuickGame:
         self.best_player_home = tk.Label(self.player_ratings_home_frame)
         self.best_player_home.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Premier joueur')
+            textvariable=home_top_player)
         self.best_player_home.grid(column=0, padx=100, pady=3, row=0)
         self.second_player_home = tk.Label(self.player_ratings_home_frame)
         self.second_player_home.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Deuxième Joueur')
+            textvariable=home_second_player)
         self.second_player_home.grid(column=0, pady=3, row=1)
         self.third_player_home = tk.Label(self.player_ratings_home_frame)
         self.third_player_home.configure(
             font="{Yu Gothic UI Semilight} 12 {}",
-            text='Troisième Joueur')
+            textvariable=home_third_player)
         self.third_player_home.grid(column=0, pady=3, row=2)
         self.best_player_rating_home = tk.Label(
             self.player_ratings_home_frame)
         self.best_player_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=home_top_rating)
         self.best_player_rating_home.grid(column=1, row=0)
         self.second_player_rating_home = tk.Label(
             self.player_ratings_home_frame)
         self.second_player_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=home_second_rating)
         self.second_player_rating_home.grid(column=1, row=1)
         self.third_player_rating_home = tk.Label(
             self.player_ratings_home_frame)
         self.third_player_rating_home.configure(
-            font="{Yu Gothic UI Semibold} 12 {}", text='90')
+            font="{Yu Gothic UI Semibold} 12 {}", textvariable=home_third_rating)
         self.third_player_rating_home.grid(column=1, row=2)
         self.player_ratings_home_frame.pack(side="top")
         self.notebook_home.add(
             self.player_ratings_home_frame,
             text='Joueurs')
+        self.home_info_frame = tk.Frame(self.notebook_home)
+        self.home_info_frame.configure(height=200, width=200)
+        self.home_coach_label = tk.Label(self.home_info_frame)
+        self.home_coach_label.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            text='Entraîneur-chef')
+        self.home_coach_label.grid(column=0, ipadx=50, row=0)
+        self.home_coach_name = tk.Label(self.home_info_frame)
+        self.home_coach_name.configure(
+            font="{Yu Gothic UI Semibold} 12 {bold}",
+            textvariable=home_coach_name_text)
+        self.home_coach_name.grid(column=0, row=1)
+        self.home_arena_label = tk.Label(self.home_info_frame)
+        self.home_arena_label.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            text='Aréna/Capacité')
+        self.home_arena_label.grid(column=1, ipadx=50, row=0)
+        self.home_arena = tk.Label(self.home_info_frame)
+        self.home_arena.configure(
+            font="{Yu Gothic UI Semibold} 12 {bold}",
+            textvariable=home_arena_text)
+        self.home_arena.grid(column=1, row=1)
+        self.home_capacity = tk.Label(self.home_info_frame)
+        self.home_capacity.configure(
+            font="{Yu Gothic UI Semilight} 12 {}",
+            textvariable=home_capacity_text)
+        self.home_capacity.grid(column=1, row=2)
+        self.home_info_frame.grid(column=0, row=0)
+        self.notebook_home.add(self.home_info_frame, text='Informations')
         self.notebook_home.pack(side="top")
         self.team_ratings_home.pack(side="top")
         self.team_ratings_home.pack_propagate(0)
         self.homeside_frame.grid(column=2, row=0)
         self.homeside_frame.pack_propagate(0)
-        self.root.grid_propagate(0)
+        self.grid_propagate(0)
+        self.grid(row=0, column=0, sticky="nsew")
 
-        self.mainwindow = self.root
+        self.mainwindow = self
 
-    def run(self):
-        self.mainwindow.mainloop()
+        # Première équipe à domicile
+        selected_home_team = random.randint(0, len(equipes)-1)
+        # Section Informations
+        home_coach_name_text.set(equipes[selected_home_team][5])
+        home_arena_text.set(equipes[selected_home_team][3])
+        home_capacity_text.set(equipes[selected_home_team][4])
+
+        # Section Général
+        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_home_team][6]+"' AND player.def < 100;")
+        global_rating = db.cursor.fetchall()
+
+        total_rating_home_text.set(global_rating[0][0])
+        forwards_rating_home_text.set(global_rating[0][1])
+        defense_rating_home_text.set(global_rating[0][2])
+        
+        # Section Joueurs
+        db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_home_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+        global home_top3_players
+        home_top3_players = db.cursor.fetchall()
+
+        home_top_rating.set(str(home_top3_players[0][11]))
+        home_second_rating.set(str(home_top3_players[1][11]))
+        home_third_rating.set(str(home_top3_players[2][11]))
+
+        home_top_player.set(home_top3_players[0][1])
+        home_second_player.set(home_top3_players[1][1])
+        home_third_player.set(home_top3_players[2][1])
+
+        home_team_city.set(equipes[selected_home_team][2])
+        home_team_name.set(equipes[selected_home_team][1])
+
+        self.img_home_logo = ImageTk.PhotoImage(file="img/team_logos/"+str(equipes[selected_home_team][0])+".png")
+        self.logo_home.config(image=self.img_home_logo)
+
+        # Première équipe à l'étranger
+        selected_away_team = random.randint(0, len(equipes)-1)
+        # Section Informations
+        away_coach_name_text.set(equipes[selected_away_team][5])
+        away_arena_text.set(equipes[selected_away_team][3])
+        away_capacity_text.set(equipes[selected_away_team][4])
+        
+        # Section Général
+        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_away_team][6]+"' AND player.def < 100;")
+        global_rating = db.cursor.fetchall()
+
+        total_rating_away_text.set(global_rating[0][0])
+        forwards_rating_away_text.set(global_rating[0][1])
+        defense_rating_away_text.set(global_rating[0][2])
+
+        # Section Joueurs
+        db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_away_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+        global away_top3_players
+        away_top3_players = db.cursor.fetchall()
+
+        away_top_rating.set(str(away_top3_players[0][11]))
+        away_second_rating.set(str(away_top3_players[1][11]))
+        away_third_rating.set(str(away_top3_players[2][11]))
+
+        away_top_player.set(away_top3_players[0][1])
+        away_second_player.set(away_top3_players[1][1])
+        away_third_player.set(away_top3_players[2][1])
+        
+        away_team_city.set(equipes[selected_away_team][2])
+        away_team_name.set(equipes[selected_away_team][1])
+
+        self.img_away_logo = ImageTk.PhotoImage(file="img/team_logos/"+str(equipes[selected_away_team][0])+".png")
+        self.logo_away.config(image=self.img_away_logo)
 
 if __name__ == "__main__":
     app = QuickGame()

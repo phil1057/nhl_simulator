@@ -4,22 +4,15 @@ import pygubu
 import tkinter as tk
 import tkinter.ttk as ttk
 from pygame import mixer
-from game import *
 from quick_game import *
 
-mixer.init()
-mixer.music.load("la_soiree_du_hockey_loop.mp3")
 
-PROJECT_PATH = pathlib.Path(__file__).parent
-PROJECT_UI = PROJECT_PATH / "gui/main_menu.ui"
-
-
-class MainMenu: 
+class MainMenu(tk.Frame): 
     def __init__(self, parent, controller):
         # build ui
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.img_tinynhllogo = tk.PhotoImage(file="img/main_menu/tiny-nhl-logo.png")
+        
         self.frame_background = ttk.Frame(self)
         self.frame_background.configure(height=720, width=1290)
         self.background_image = ttk.Label(self.frame_background)
@@ -75,20 +68,9 @@ class MainMenu:
             text='label1')
         self.nhl_logo_label.grid(
             column=0, padx=150, pady=50, row=0, sticky="ne")
-        self.grid_propagate(0)
-
-    def run(self):
-        mixer.music.play()
-        self.mainwindow.mainloop()
 
     def GoToQuickGame(self):
         self.controller.show_page(QuickGame)
 
     def GoToInfo(self):
         pass
-        
-        
-
-if __name__ == "__main__":
-    main_menu = MainMenu()
-    main_menu.run()

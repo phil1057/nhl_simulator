@@ -1,5 +1,5 @@
 import sqlite3
 
 class Database:
-    def connect():
-        con = sqlite3.connect("nhl_simulator.db")
+    con = sqlite3.connect("nhl_simulator.db")
+    cursor = con.cursor()
