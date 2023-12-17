@@ -76,7 +76,7 @@ class QuickGame(tk.Frame):
             global selected_home_team
 
             selected_home_team += 1
-            if selected_home_team == 8:
+            if selected_home_team == 9:
                 selected_home_team = 1
 
             # Section Informations
@@ -118,7 +118,7 @@ class QuickGame(tk.Frame):
 
             selected_home_team -= 1
             if selected_home_team == 0:
-                selected_home_team = 7
+                selected_home_team = 8
 
             # Section Informations
             home_coach_name_text.set(equipes[selected_home_team][5])
@@ -159,7 +159,7 @@ class QuickGame(tk.Frame):
             global selected_away_team
 
             selected_away_team += 1
-            if selected_away_team == 8:
+            if selected_away_team == 9:
                 selected_away_team = 1
 
             # Section Informations
@@ -200,7 +200,7 @@ class QuickGame(tk.Frame):
 
             selected_away_team -= 1
             if selected_away_team == 0:
-                selected_away_team = 7
+                selected_away_team = 8
 
             # Section Informations
             away_coach_name_text.set(equipes[selected_away_team][5])
@@ -598,7 +598,7 @@ class QuickGame(tk.Frame):
         home_capacity_text.set(equipes[selected_home_team][4])
 
         # Section Général
-        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_home_team][6]+"' AND player.def < 100;")
+        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+str(equipes[selected_home_team][6])+"' AND player.def < 100;")
         global_rating = db.cursor.fetchall()
 
         total_rating_home_text.set(global_rating[0][0])
@@ -606,7 +606,7 @@ class QuickGame(tk.Frame):
         defense_rating_home_text.set(global_rating[0][2])
         
         # Section Joueurs
-        db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_home_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+        db.cursor.execute("SELECT * FROM player WHERE team='"+str(equipes[selected_home_team][6])+"' ORDER BY player.ovr DESC LIMIT 3")
         global home_top3_players
         home_top3_players = db.cursor.fetchall()
 
@@ -632,7 +632,7 @@ class QuickGame(tk.Frame):
         away_capacity_text.set(equipes[selected_away_team][4])
         
         # Section Général
-        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+equipes[selected_away_team][6]+"' AND player.def < 100;")
+        db.cursor.execute("SELECT CAST(ROUND(AVG(ovr)) AS INT), CAST(ROUND(AVG(off)) AS INT), CAST(ROUND(AVG(def)) AS INT) FROM player WHERE team='"+str(equipes[selected_away_team][6])+"' AND player.def < 100;")
         global_rating = db.cursor.fetchall()
 
         total_rating_away_text.set(global_rating[0][0])
@@ -640,7 +640,7 @@ class QuickGame(tk.Frame):
         defense_rating_away_text.set(global_rating[0][2])
 
         # Section Joueurs
-        db.cursor.execute("SELECT * FROM player WHERE team='"+equipes[selected_away_team][6]+"' ORDER BY player.ovr DESC LIMIT 3")
+        db.cursor.execute("SELECT * FROM player WHERE team='"+str(equipes[selected_away_team][6])+"' ORDER BY player.ovr DESC LIMIT 3")
         global away_top3_players
         away_top3_players = db.cursor.fetchall()
 

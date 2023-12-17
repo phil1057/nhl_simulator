@@ -5,12 +5,50 @@ from pygubu.widgets.scrolledframe import ScrolledFrame
 from db import Database
 from tkinter import messagebox
 import random
+from db import Database
 
 
 
 class Game(tk.Frame):
+
+    global db
+    db = Database()
+
+    global overall; overall = []
+    
     
     def receive_info(self, info):
+
+        global away; away = info[0]
+        global home; home = info[1]
+
+        global score_away_int; score_away_int = 0
+        global score_home_int; score_home_int = 0
+
+        db.cursor.execute("SELECT name, ovr, off, team FROM player WHERE team='"+info[0][6]+"' AND position != 'G'")
+        global away_players
+        away_players = db.cursor.fetchall()
+        
+        for x in range(0, len(away_players)):
+            for y in range(0, away_players[x][1]):
+                overall.append([away_players[x][0], away_players[x][1], away_players[x][3]])
+
+        db.cursor.execute("SELECT name, ovr, off, team FROM player WHERE team='"+info[1][6]+"' AND position != 'G'")
+        global home_players
+        home_players = db.cursor.fetchall()
+        
+        for x in range(0, len(home_players)):
+            for y in range(0, home_players[x][1]):
+                overall.append([home_players[x][0], home_players[x][1], home_players[x][3]])
+
+        db.cursor.execute("SELECT AVG(def) FROM player WHERE team='"+info[0][6]+"'")
+        global away_defense
+        away_defense = db.cursor.fetchall()
+
+        db.cursor.execute("SELECT AVG(def) FROM player WHERE team='"+info[1][6]+"'")
+        global home_defense
+        home_defense = db.cursor.fetchall()
+
         self.img_home = tk.PhotoImage(file="img/ingame_logos/"+info[1][2]+".png")
         self.img_away = tk.PhotoImage(file="img/ingame_logos/"+info[0][2]+".png")
 
@@ -82,6 +120,11 @@ class Game(tk.Frame):
         elif period_in_param == 3:
             period_text.set("3ième")
             period_str = "3ième"
+        elif period_in_param == 4 and score_away_int == score_home_int:
+            period_text.set("Prol.")
+            period_str = "Prol."
+            self.GameLoop(300)
+            return
         elif period_in_param == 4:
             messagebox.showinfo("Match terminé!", f"Marque Finale:\rAway:{score_away_text.get()}\rHome:{score_home_text.get()}")
             quit()
@@ -90,15 +133,43 @@ class Game(tk.Frame):
     def GameLoop(self, time_left=1200):
         mins, secs = divmod(time_left, 60)
         self.timer.config(text=f"{mins:02d}:{secs:02d}")
+        try:
+            try:
+                action = random.randint(0, 100000)
+                print(overall[action])
+                if away[6] == overall[action][2]:
+                    global score_away_int
+                    attack = overall[action][1] / 100
+                    defense = home_defense[0][0] / 100
+                    sog = random.uniform(0, 2)
+                    goal_probability = attack * (1 - defense)        
+                    if sog <= goal_probability:
+                        score_away_int += 1
+                        score_away_text.set(score_away_int) 
+                        messagebox.showinfo(f"ET LE BUUUUUUUUT DES {away[1].upper()}!!!!", "Marqué par:\n\n"+overall[action][0])
+
+                elif home[6] == overall[action][2]:
+                    global score_home_int
+                    attack = overall[action][1] / 100
+                    defense = away_defense[0][0] / 100
+                    sog = random.uniform(0, 2)
+                    goal_probability = attack * (1 - defense)
+                    if sog <= goal_probability:
+                        score_home_int += 1
+                        score_home_text.set(score_home_int)
+                        messagebox.showinfo(F"ET LE BUUUUUUUUT DES {home[1].upper()}!!!!", "Marqué par:\n\n"+overall[action][0])
+            
+            
+            except TypeError:
+                pass
+        except IndexError:
+            pass
+        
         
         self.period_string_update(self.game_period)
 
         if self.game_period <= 3:
             if time_left > 0:  # Continue countdown until time_left becomes 0
-                #random_var = random.randint(0, 10)
-                #if random_var == 5:
-                    #messagebox.showinfo("But", "ya eu un but")
-                print(time_left)
                 self.after(50, self.GameLoop, time_left - 1)
             else:
                 self.game_period += 1
@@ -109,8 +180,7 @@ class Game(tk.Frame):
 
         db = Database()
 
-        # Text Variables 
-
+        # Text Variables
         global score_away_text;score_away_text = tk.StringVar()
         global score_home_text;score_home_text = tk.StringVar()
         global team_name_away_text;team_name_away_text = tk.StringVar()
