@@ -198,6 +198,8 @@ class Game(tk.Frame):
         
         try:
             try:
+                action = random.randint(0, 150000)
+                print(overall[action])
                 action = random.randint(0, 200000)
                 if away[6] == overall[action][2]:
                     update_selected_away(overall[action][0], 'tir')
