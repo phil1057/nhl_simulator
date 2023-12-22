@@ -377,38 +377,14 @@ class QuickGame(tk.Frame):
             font="{Yu Gothic UI Semibold} 24 {}",
             text='Choix des équipes')
         self.choix_des_equipes_label.grid(column=1, row=1)
-        self.page_description_label = tk.Label(self.center_frame)
-        self.page_description_label.configure(
-            font="{Yu Gothic UI Semilight} 14 {}",
-            justify="center",
-            text='En sélectionnant une option.\nLe match va débuter.')
-        self.page_description_label.grid(column=1, row=2)
         self.both_teams_button = ttk.Button(self.center_frame)
-        self.img_both_sides = ImageTk.PhotoImage(file="img/arrows/both_sides.png")
+        self.img_both_sides = ImageTk.PhotoImage(file="img/arrows/commencer_la_partie.png")
         self.both_teams_button.configure(
             image=self.img_both_sides,
             style="Toolbutton",
             text='button1',
             command=StartGame)
         self.both_teams_button.grid(column=1, row=3)
-        self.away_team_button = ttk.Button(self.center_frame)
-        self.img_left = ImageTk.PhotoImage(file="img/arrows/left.png")
-        self.away_team_button.configure(
-            image=self.img_left,
-            style="Toolbutton",
-            text='button2')
-        self.away_team_button.grid(column=0, ipadx=9, row=3)
-        self.home_team_button = ttk.Button(self.center_frame)
-        self.img_right = ImageTk.PhotoImage(file="img/arrows/right.png")
-        self.home_team_button.configure(
-            image=self.img_right,
-            style="Toolbutton",
-            text='button3')
-        self.home_team_button.grid(column=2, padx=30, row=3, sticky="e")
-        self.none_button = ttk.Button(self.center_frame)
-        self.img_none = ImageTk.PhotoImage(file="img/arrows/none.png")
-        self.none_button.configure(image=self.img_none, style="Toolbutton")
-        self.none_button.grid(column=1, pady=30, row=4)
         self.up_away_button = ttk.Button(self.center_frame)
         self.img_up = ImageTk.PhotoImage(file="img/arrows/up.png")
         self.up_away_button.configure(

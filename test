@@ -1,0 +1,44 @@
+import tkinter as tk
+from tkinter import ttk
+
+data = [
+    {'name': 'Alice', 'age': 25},
+    {'name': 'Bob', 'age': 30},
+    {'name': 'Charlie', 'age': 28},
+    # Add more data as needed
+]
+
+def update_and_select_row():
+    # Get the currently selected item
+    selected_item = tree.focus()
+    if selected_item:
+        # Get the name and index of the selected row
+        selected_row_name = tree.item(selected_item)['values'][0]
+        
+        # Find and update the row based on the name
+        for row in data:
+            if row['name'] == selected_row_name:
+                row['age'] += 1
+                for item_id in tree.get_children():
+                    item = tree.item(item_id)
+                    if item['values'][0] == selected_row_name:  # Assuming 'name' is in the first column
+                        tree.item(item_id, values=(row['name'], row['age']))  # Update the row values
+                        tree.selection_set(item_id)  # Select the updated row
+                        break
+
+root = tk.Tk()
+root.title("TreeView Example")
+
+tree = ttk.Treeview(root, columns=('Name', 'Age'), show='headings')
+tree.heading('Name', text='Name')
+tree.heading('Age', text='Age')
+
+for person in data:
+    tree.insert('', 'end', values=(person['name'], person['age']))
+
+tree.pack()
+
+update_selected_button = tk.Button(root, text="Update Selected Row", command=update_and_select_row)
+update_selected_button.pack()
+
+root.mainloop()
