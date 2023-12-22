@@ -135,7 +135,7 @@ class Game(tk.Frame):
         self.timer.config(text=f"{mins:02d}:{secs:02d}")
         try:
             try:
-                action = random.randint(0, 100000)
+                action = random.randint(0, 150000)
                 print(overall[action])
                 if away[6] == overall[action][2]:
                     global score_away_int
@@ -145,8 +145,27 @@ class Game(tk.Frame):
                     goal_probability = attack * (1 - defense)        
                     if sog <= goal_probability:
                         score_away_int += 1
-                        score_away_text.set(score_away_int) 
-                        messagebox.showinfo(f"ET LE BUUUUUUUUT DES {away[1].upper()}!!!!", "Marqué par:\n\n"+overall[action][0])
+                        score_away_text.set(score_away_int)
+                        num_assists = random.randint(0, 2)
+                        assists = []
+                        # If there's at least one assist
+                        if num_assists > 0:
+                            # Randomly select assisting players from away team
+                            assisting_players = random.sample(away_players, num_assists)
+                            # Add assisting players to the assists list
+                            for player in assisting_players:
+                                assists.append(player[0])  # Assuming player[0] contains player names
+                        
+                        # Show assists information (modify as needed)
+                        if num_assists == 1:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {away[1].upper()}!",
+                                                f"Marqué par:\n{overall[action][0]}\n\nAssisté par: {assists[0]}")
+                        elif num_assists == 2:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {away[1].upper()}!",
+                                                f"Marqué par:\n{overall[action][0]}\n\nAssisté par: {assists[0]}, {assists[1]}")
+                        else:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {away[1].upper()}!",
+                                                f"Marqué par:\n{overall[action][0]}\n\nSans aides")
 
                 elif home[6] == overall[action][2]:
                     global score_home_int
@@ -157,7 +176,26 @@ class Game(tk.Frame):
                     if sog <= goal_probability:
                         score_home_int += 1
                         score_home_text.set(score_home_int)
-                        messagebox.showinfo(F"ET LE BUUUUUUUUT DES {home[1].upper()}!!!!", "Marqué par:\n\n"+overall[action][0])
+                        num_assists = random.randint(0, 2)
+                        assists = []
+                        # S'il y a au moins une passe décisive
+                        if num_assists > 0:
+                            # Sélectionner de manière aléatoire des joueurs de l'équipe à domicile
+                            assisting_players = random.sample(home_players, num_assists)
+                            # Ajouter les joueurs sélectionnés à la liste des passes décisives
+                            for player in assisting_players:
+                                assists.append(player[0])  # On suppose que player[0] contient les noms des joueurs
+                        
+                        # Afficher les informations sur les passes décisives (à modifier selon vos besoins)
+                        if num_assists == 1:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {home[1].upper()} !",
+                                                f"Marqué par :\n\n{overall[action][0]}\n\nAssisté par: {assists[0]}")
+                        elif num_assists == 2:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {home[1].upper()} !",
+                                                f"Marqué par :\n\n{overall[action][0]}\n\nAssisté par: {assists[0]}\n{assists[1]}")
+                        else:
+                            messagebox.showinfo(f"ET LE BUUUUT DES {home[1].upper()} !",
+                                                f"Marqué par :\n\n{overall[action][0]}\nSans aides")
             
             
             except TypeError:
